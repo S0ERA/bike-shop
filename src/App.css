@@ -1,8 +1,15 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  background: #505063;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+.pageName {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  color: #ffffff;
 }
 
 .logo {
@@ -16,12 +23,404 @@
 }
 
 .headerWrapper {
+  position: sticky; /* Фиксируем хедер вверху */
   display: flex;
-  right: 0;
-  left:0;
+  justify-content: space-between; /* Лого слева, навбар справа */
+  align-items: center;
+  padding: 1rem 2rem; /* Отступы внутри хедера */
+  background: #505063; /* Белый фон */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень под хедером */
+  z-index: 1000; /* Убедимся, что хедер поверх контента */
+}
+
+.navbar {
+  display: flex;
+  gap: 1rem; /* Расстояние между ссылками */
+}
+
+.linkNav {
+  text-decoration: none; /* Убираем подчёркивание */
+  padding: 0.5rem 1rem; /* Отступы внутри кнопок */
+  border-radius: 8px; /* Скруглённые углы */
+  color: #ffffff;
+  background-color: #373747; /* Светлый фон для кнопок */
+  transition: background-color 0.3s ease; /* Плавное изменение фона */
+}
+
+.linkNav:hover {
+  background-color: #7c7c99; /* Изменение фона при наведении */
+}
+
+.linkNav span {
+  font-size: 1rem; /* Размер текста */
+  font-weight: 500; /* Полужирный текст */
+}
+
+/*.bikeCard {*/
+/*  position: relative;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  width: 240px;*/
+/*  height: 180px;*/
+/*  border-radius: 5px;*/
+/*  background: #373747;*/
+/*  padding: 1rem;*/
+/*}*/
+
+/*.bikeImg {*/
+/*  width: 78px;*/
+/*  height: 66px;*/
+/*}*/
+
+/*.bikeList {*/
+/*  display: flex;*/
+/*}*/
+
+.catalogWrapper {
+  padding: 2rem; /* Отступы вокруг всего каталога */
+}
+
+.bikeList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Адаптивная сетка */
+  gap: 1.5rem; /* Расстояние между карточками */
+  list-style: none; /* Убираем маркеры списка */
+  padding: 0;
+  margin: 0;
+}
+
+/* src/components/BikeCard.css */
+.bikeCard {
+  border: 1px solid #373747;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #434358;
+  color: #cdcdcd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Располагаем элементы вертикально */
+  height: 100%; /* Карточка занимает всю доступную высоту */
+}
+
+.bikeCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bikeImg {
+  width: 100%; /* Фото занимает всю ширину карточки */
+  height: auto; /* Высота изменяется пропорционально ширине */
+  aspect-ratio: 5 / 3; /* Соотношение сторон (ширина / высота) */
+  object-fit: cover; /* Обрезаем фото, чтобы оно заполняло область */
+}
+
+.bikeInfo {
+  padding: 1rem;
+  flex-grow: 1; /* Контент занимает оставшееся пространство */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Распределяем пространство между элементами */
+}
+
+.bikeName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  color: #ffffff;
+}
+
+.bikePrice {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0.1rem 0;
+}
+
+.bikeDetails {
+  font-size: 0.9rem;
+  color: #cdcdcd;
+  margin: 0.5rem 0;
+}
+
+.addToCartButton {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #373747;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.addToCartButton:hover {
+  background-color: #7c7c99;
+}
+
+.loadErr {
+  display: flex;
+  margin-top: 5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
+  color: #ffffff;
+}
+
+.green {
+  color: #49a933;
+}
+
+.red {
+  color: #dc3545;
+}
+
+.resetButton {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.resetButton:hover {
+  background-color: #c82333;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   justify-content: space-between;
   align-items: center;
-  margin: 30px;
-  position: absolute; /*sticky*/
-  top: 0;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #434358;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.filters select {
+  padding: 0.5rem 1rem;
+  background-color: #373747;
+  color: #ffffff;
+  border: 1px solid #505063;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.filters select:hover {
+  background-color: #7c7c99;
+  border-color: #7c7c99;
+}
+
+.filters select:focus {
+  outline: none;
+  border-color: #646cffaa;
+}
+
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.filters input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #646cffaa;
+  cursor: pointer;
+}
+
+.sorting {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #434358;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sorting select {
+  padding: 0.5rem 1rem;
+  background-color: #373747;
+  color: #ffffff;
+  border: 1px solid #505063;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.sorting select:hover {
+  background-color: #7c7c99;
+  border-color: #7c7c99;
+}
+
+.sorting select:focus {
+  outline: none;
+  border-color: #646cffaa;
+}
+
+/* Контейнер корзины */
+.cartWrapper {
+  padding: 2rem;
+  background-color: #434358;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+/* Заголовок страницы */
+.pageName {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: #ffffff;
+}
+
+/* Список товаров */
+.cartList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Элемент товара */
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #505063;
+}
+
+/* Информация о товаре */
+.itemInfo {
+  flex: 1;
+}
+
+.itemName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+}
+
+.itemPrice {
+  font-size: 1rem;
+  color: #cdcdcd;
+  margin: 0.5rem 0;
+}
+
+/* Действия с товаром */
+.itemActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.itemActions input {
+  width: 60px;
+  padding: 0.5rem;
+  border: 1px solid #505063;
+  border-radius: 4px;
+  background-color: #373747;
+  color: #ffffff;
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Кнопка удаления */
+.removeButton {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+  background-color: #c82333;
+}
+
+/* Промежуточная сумма */
+.subtotal {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+/* Поле для промокода */
+.promoCode {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.promoCode input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #505063;
+  border-radius: 4px;
+  background-color: #373747;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.promoCode button {
+  padding: 0.5rem 1rem;
+  background-color: #646cffaa;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.promoCode button:hover {
+  background-color: #535bf2;
+}
+
+/* Итоговая сумма */
+.total {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.total p {
+  margin: 0.5rem 0;
+}
+
+/* Кнопка очистки корзины */
+.clearCartButton {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.clearCartButton:hover {
+  background-color: #c82333;
 }

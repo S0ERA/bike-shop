@@ -1,6 +1,6 @@
 import {RouterProvider} from "react-router";
-import routes from "./pages/Routes.tsx";
 import './App.css'
+import routes from "@/pages/routes";
 
 function App() {
 
