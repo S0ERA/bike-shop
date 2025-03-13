@@ -1,75 +1,33 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useAppDispatch, useAppSelector } from "@/app/store";
-import { removeFromCart, updateQuantity, applyPromoCode, clearCart } from "@/cartSlice";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from '@/shared/hooks/hooks';
+import { clearCart } from '@/entities/cart/model/slice';
+import { Link } from 'react-router';
+import { CartList } from '@/features/cart/ui/CartList';
+import { OrderSummary } from '@/features/cart/ui/OrderSummary';
+import { PromoCode } from '@/features/cart/ui/PromoCode';
+import { CartWrapper, CheckoutButton, ClearCartButton } from '@/features/cart/ui/styles';
 
 export function Cart() {
-    const dispatch = useAppDispatch();
-    const {items, promoCode, discount} = useAppSelector(state => state.cart);
-    const [promoInput, setPromoInput] = useState("");
+  const dispatch = useAppDispatch();
+  const { items, discount } = useAppSelector((state) => state.cart);
 
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = subtotal * (1 - discount);
 
-    const total = subtotal * (1 - discount);
+  return (
+    <CartWrapper>
+      <h1 className="pageName">Корзина</h1>
 
-    const handleApplyPromoCode = () => {
-        dispatch(applyPromoCode(promoInput));
-        setPromoInput("");
-    };
+      <CartList items={items} />
 
-        return (
-            <div className="cartWrapper">
-                <h1 className="pageName">Корзина</h1>
+      <OrderSummary subtotal={subtotal} total={total} discount={discount} />
 
-                <ul className="cartList">
-                    {items.map((item) => (
-                        <li key={item.id} className="cartItem">
-                            <div className="itemInfo">
-                                <h3 className="itemName">{item.name}</h3>
-                                <p className="itemPrice">{item.price.toLocaleString("ru-RU")} ₽</p>
-                            </div>
-                            <div className="itemActions">
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={item.quantity}
-                                    onChange={(e) =>
-                                        dispatch(updateQuantity({id: item.id, quantity: parseInt(e.target.value)}))
-                                    }
-                                />
-                                <button
-                                    className="removeButton"
-                                    onClick={() => dispatch(removeFromCart(item.id))}
-                                >
-                                    Удалить
-                                </button>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+      <PromoCode />
 
-                <div className="subtotal">
-                    <p>Промежуточная сумма: {subtotal.toLocaleString("ru-RU")} ₽</p>
-                </div>
+      <Link to="/checkoutPage">
+        <CheckoutButton>Оформить заказ</CheckoutButton>
+      </Link>
 
-                <div className="promoCode">
-                    <input
-                        type="text"
-                        placeholder="Введите промокод"
-                        value={promoInput}
-                        onChange={(e) => setPromoInput(e.target.value)}
-                    />
-                    <button onClick={handleApplyPromoCode}>Применить</button>
-                </div>
-
-                <div className="total">
-                    <p>Итоговая сумма: {total.toLocaleString("ru-RU")} ₽</p>
-                    {discount > 0 && <p>Скидка: {(discount * 100).toFixed(0)}%</p>}
-                </div>
-
-                <button className="clearCartButton" onClick={() => dispatch(clearCart())}>
-                    Очистить корзину
-                </button>
-            </div>
-        )
-    }
+      <ClearCartButton onClick={() => dispatch(clearCart())}>Очистить корзину</ClearCartButton>
+    </CartWrapper>
+  );
+}
