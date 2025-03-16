@@ -7,12 +7,8 @@ export const ThemeToggle = () => {
   const dispatch = useAppDispatch();
   const isDarkTheme = useAppSelector((state) => state.theme.isDarkTheme);
 
-  const handleToggleTheme = () => {
-    dispatch(toggleTheme());
-  };
-
   return (
-    <SwitchContainer onClick={handleToggleTheme} $isDarkTheme={isDarkTheme}>
+    <SwitchContainer onClick={() => dispatch(toggleTheme())} $isDarkTheme={isDarkTheme}>
       <Sun />
       <Slider $isDarkTheme={isDarkTheme} />
       <Star />

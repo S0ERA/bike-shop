@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { checkoutSchema } from '@/shared/utils/schemas';
+import { checkoutSchema } from '@/features/checkout/model/validation/schemas';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks/hooks';
 import { clearCart } from '@/entities/cart/model/slice';
 

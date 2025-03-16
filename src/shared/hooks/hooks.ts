@@ -1,8 +1,8 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, AppState } from '@/app/providers/store';
 import { Bike } from '@/shared/api/bikesApi';
-import { filterBikes } from '@/shared/utils/filterBikes';
-import { sortBikes } from '@/shared/utils/sortBikes';
+import { filterBikes } from '@/features/catalog/model/filterBikes';
+import { sortBikes } from '@/features/catalog/model/sortBikes';
 import { addToCart, removeFromCart, updateQuantity } from '@/entities/cart/model/slice';
 
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;

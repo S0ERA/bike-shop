@@ -2,12 +2,10 @@ import { RouterProvider } from 'react-router';
 import { routes } from '@/app/providers/routes';
 import { GlobalStyles } from '@/shared/ui/globalStyles';
 import { ThemeProvider } from 'styled-components';
-import { darkTheme, lightTheme } from '@/app/theme';
-import { useAppSelector } from '@/shared/hooks/hooks';
+import {useTheme} from '@/entities/theme/model/useTheme';
 
 function App() {
-  const isDarkTheme = useAppSelector((state) => state.theme.isDarkTheme);
-  const theme = isDarkTheme ? darkTheme : lightTheme;
+  const theme = useTheme();
 
   return (
     <ThemeProvider theme={theme}>
