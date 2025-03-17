@@ -20,16 +20,27 @@ interface CartItemProps {
 export function CartItem({ item }: CartItemProps) {
   const dispatch = useAppDispatch();
 
+  const handleUpdateQuantity = (quantity: number) => {
+  dispatch(updateQuantity({ id: item.id, quantity}))
+  }
+
+  const handleRemoveQuantity = () => {
+    dispatch(removeFromCart(item.id))
+  }
+
+  const price = `${item.price.toLocaleString('ru-RU')} ₽`
+
+
   return (
     <CartItemWrapper>
       <ItemInfo>
         <ItemName>{item.name}</ItemName>
-        <ItemPrice>{item.price.toLocaleString('ru-RU')} ₽</ItemPrice>
+        <ItemPrice>{price}</ItemPrice>
       </ItemInfo>
       <ItemActions>
         <QuantityControls>
           <QuantityButton
-            onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }))}
+            onClick={() => handleUpdateQuantity(item.quantity - 1)}
             disabled={item.quantity <= 1}
           >
             -
@@ -39,16 +50,14 @@ export function CartItem({ item }: CartItemProps) {
             min="1"
             value={item.quantity}
             onChange={(e) =>
-              dispatch(updateQuantity({ id: item.id, quantity: parseInt(e.target.value) || 1 }))
-            }
+              handleUpdateQuantity(parseInt(e.target.value) || 1 )}
           />
           <QuantityButton
-            onClick={() => dispatch(updateQuantity({ id: item.id, quantity: item.quantity + 1 }))}
-          >
+            onClick={() => handleUpdateQuantity(item.quantity + 1)}>
             +
           </QuantityButton>
         </QuantityControls>
-        <RemoveButton onClick={() => dispatch(removeFromCart(item.id))}>Удалить</RemoveButton>
+        <RemoveButton onClick={handleRemoveQuantity}>Удалить</RemoveButton>
       </ItemActions>
     </CartItemWrapper>
   );
