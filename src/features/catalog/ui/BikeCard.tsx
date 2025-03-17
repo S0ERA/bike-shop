@@ -7,8 +7,9 @@ import {
   BikeInfo,
   BikeName,
   BikePrice,
+  QuantityControls
 } from '@/features/catalog/ui/styles';
-import { Buttons, QuantityButton, QuantityControls } from '@/shared/ui/Buttons';
+import Button from '@/shared/ui/Button/ui/Button';
 
 interface BikeCardProps {
   item: Bike;
@@ -33,16 +34,16 @@ export function BikeCard({ item, quantity, onAddToCart, onUpdateQuantity }: Bike
           </p>
         </BikeDetails>
         {quantity === 0 ? (
-          <Buttons onClick={() => onAddToCart(item)}>В корзину</Buttons>
+          <Button type={'default'} onClick={() => onAddToCart(item)}>В корзину</Button>
         ) : (
           <QuantityControls>
-            <QuantityButton onClick={() => onUpdateQuantity(item.id, quantity - 1)}>
+            <Button type={"quantity"} onClick={() => onUpdateQuantity(item.id, quantity - 1)}>
               -
-            </QuantityButton>
+            </Button>
             <span className="quantity">{quantity}</span>
-            <QuantityButton onClick={() => onUpdateQuantity(item.id, quantity + 1)}>
+            <Button type={"quantity"} onClick={() => onUpdateQuantity(item.id, quantity + 1)}>
               +
-            </QuantityButton>
+            </Button>
           </QuantityControls>
         )}
       </BikeInfo>

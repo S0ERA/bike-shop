@@ -5,12 +5,13 @@ import { CartList } from '@/features/cart/ui/CartList';
 import { OrderSummary } from '@/features/cart/ui/OrderSummary';
 import { PromoCode } from '@/features/cart/ui/PromoCode';
 import { CartWrapper, CheckoutButton, ClearCartButton } from '@/features/cart/ui/styles';
+import { useMemo } from 'react';
 
 export function Cart() {
   const dispatch = useAppDispatch();
   const { items, discount } = useAppSelector((state) => state.cart);
 
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = useMemo(() => items.reduce((sum, item) => sum + item.price * item.quantity, 0), []);
   const total = subtotal * (1 - discount);
 
   return (
