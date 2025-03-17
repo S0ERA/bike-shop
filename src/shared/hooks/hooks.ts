@@ -8,7 +8,7 @@ import { addToCart, removeFromCart, updateQuantity } from '@/entities/cart/model
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
-export const useFilteredAndSortedBikes = (data: Bike[]) => {
+export const useFilteredAndSortedData = (data: Bike[]) => {
   const { type, brand, priceRange, frameSize, inStock, sortBy } = useAppSelector(
     (state) => state.filters,
   );
