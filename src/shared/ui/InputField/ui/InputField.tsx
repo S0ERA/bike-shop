@@ -1,15 +1,15 @@
-import { FormikProps } from 'formik';
 import { ErrorMessage, FormGroup, FormInput, FormLabel } from '@/features/checkout/ui/styles';
+import { useFormikContext } from 'formik';
 
 interface InputFieldProps {
   label: string;
   name: string;
   type: string;
-  formik: FormikProps<any>;
   placeholder?: string;
 }
 
-export const InputField = ({ label, name, type, formik, placeholder }: InputFieldProps) => {
+export const InputField = ({ label, name, type, placeholder }: InputFieldProps) => {
+  const formik = useFormikContext<any>();
   const errorMessage =
     formik.touched[name] && formik.errors[name] ? String(formik.errors[name]) : null;
 

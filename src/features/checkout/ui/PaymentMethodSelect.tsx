@@ -1,11 +1,8 @@
-import { FormikProps } from 'formik';
 import { ErrorMessage, FormGroup, FormLabel, FormSelect } from '@/features/checkout/ui/styles';
+import { useFormikContext } from 'formik';
 
-type Props = {
-  formik: FormikProps<any>;
-};
-
-export const PaymentMethodSelect = ({ formik }: Props) => {
+export const PaymentMethodSelect = () => {
+  const formik = useFormikContext<any>();
   const errorMessage =
     formik.touched.paymentMethod && formik.errors.paymentMethod
       ? String(formik.errors.paymentMethod)
